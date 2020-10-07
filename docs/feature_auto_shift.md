@@ -28,10 +28,7 @@ Yes, unfortunately.
    characters, you could press and hold the 'a' key for a second or two. This no
    longer works with Auto Shift because it is timing your depressed time instead
    of emitting a depressed key state to your operating system.
-2. Auto Shift is disabled for any key press that is accompanied by one or more
-   modifiers. Thus, Ctrl+A that you hold for a really long time is not the same
-   as Ctrl+Shift+A.
-3. You will have characters that are shifted when you did not intend on shifting, and
+2. You will have characters that are shifted when you did not intend on shifting, and
    other characters you wanted shifted, but were not. This simply comes down to
    practice. As we get in a hurry, we think we have hit the key long enough
    for a shifted version, but we did not. On the other hand, we may think we are
@@ -48,6 +45,21 @@ If no `rules.mk` exists, you can create one.
 
 Then compile and install your new firmware with Auto Key enabled! That's it!
 
+## Modifiers
+
+By default, Auto Shift is disabled for any key press that is accompanied by one or more
+modifiers. Thus, Ctrl+A that you hold for a really long time is not the same
+as Ctrl+Shift+A.
+
+You can re-enable Auto Shift for modifiers by adding a define to your `config.h`
+
+```c
+#define AUTO_SHIFT_MODIFIERS
+```
+
+In which case, Ctrl+A held past the `AUTO_SHIFT_TIMEOUT` will be sent as Ctrl+Shift+A
+
+
 ## Configuring Auto Shift
 
 If desired, there is some configuration that can be done to change the
@@ -56,15 +68,12 @@ behavior of Auto Shift. This is done by setting various variables the
 
 A sample is
 
-    #ifndef CONFIG_USER_H
-    #define CONFIG_USER_H
+```c
+#pragma once
 
-    #include "../../config.h"
-
-    #define AUTO_SHIFT_TIMEOUT 150
-    #define NO_AUTO_SHIFT_SPECIAL
-
-    #endif
+#define AUTO_SHIFT_TIMEOUT 150
+#define NO_AUTO_SHIFT_SPECIAL
+```
 
 ### AUTO_SHIFT_TIMEOUT (Value in ms)
 
@@ -79,10 +88,7 @@ occasion. This is simply due to habit and holding some keys a little longer
 than others. Once you find this value, work on tapping your problem keys a little
 quicker than normal and you will be set.
 
-{% hint style='info' %}
-Auto Shift has three special keys that can help you get this value right very
-quick. See "Auto Shift Setup" for more details!
-{% endhint %}
+?> Auto Shift has three special keys that can help you get this value right very quick. See "Auto Shift Setup" for more details!
 
 ### NO_AUTO_SHIFT_SPECIAL (simple define)
 
@@ -112,7 +118,7 @@ Map three keys temporarily in your keymap:
 | KC_ASRP  | Report your current Auto Shift timeout value        |
 | KC_ASON  | Turns on the Auto Shift Function                    |
 | KC_ASOFF | Turns off the Auto Shift Function                   |
-| KC_ASTG  | Toggles the statn of the Auto Shift feature         |
+| KC_ASTG  | Toggles the state of the Auto Shift feature         |
 
 Compile and upload your new firmware.
 
@@ -133,7 +139,7 @@ completely normal and with no intention of shifted keys.
    `KC_ASRP`. The keyboard will type by itself the value of your
    `AUTO_SHIFT_TIMEOUT`.
 7. Update `AUTO_SHIFT_TIMEOUT` in your `config.h` with the value reported.
-8. Remove `AUTO_SHIFT_SETUP` from your `config.h`.
+8. Add `AUTO_SHIFT_NO_SETUP` to your `config.h`.
 9. Remove the key bindings `KC_ASDN`, `KC_ASUP` and `KC_ASRP`.
 10. Compile and upload your new firmware.
 

@@ -1,4 +1,5 @@
-BLUETOOTH_ENABLE = yes
-BACKLIGHT_ENABLE = no
+# Processor frequency
 F_CPU = 8000000
 
+BLUETOOTH_ENABLE = yes
+BLUETOOTH = AdafruitBLE

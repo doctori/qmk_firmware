@@ -54,6 +54,8 @@ ARMV = 7
 # The CORTEX_VTOR... is needed only for MCHCK/Infinity KB
 OPT_DEFS += -DCORTEX_VTOR_INIT=0x00002000
 
+BOOTLOADER = dfu
+
 # Build Options
 #   comment out to disable the options.
 #
@@ -67,7 +69,7 @@ CUSTOM_MATRIX    = yes # Custom matrix file for the ErgoDox EZ
 SLEEP_LED_ENABLE = yes # Breathing sleep LED during USB suspend
 NKRO_ENABLE      = yes # USB Nkey Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
 UNICODE_ENABLE   = yes # Unicode
-ONEHAND_ENABLE   = yes # Allow swapping hands of keyboard
+SWAP_HANDS_ENABLE = yes # Allow swapping hands of keyboard
 STENO_ENABLE = yes  #enable plover steno mode
 CUSTOM_MATRIX = yes # Custom matrix file
 SERIAL_LINK_ENABLE = yes
