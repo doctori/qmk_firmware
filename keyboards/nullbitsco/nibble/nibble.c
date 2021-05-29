@@ -14,13 +14,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
-#include "bitc_led.h"
+#include "big_led.h"
 
 // Use Bit-C LED to show CAPS LOCK status
 bool led_update_kb(led_t led_state) {
     bool res = led_update_user(led_state);
+    uint8_t led_status = LED_OFF;
     if (res) {
-        set_bitc_LED(led_state.caps_lock ? LED_DIM : LED_OFF);
+        //set_bitc_LED(led_state.caps_lock ? LED_DIM : LED_OFF);
+        if (led_state.caps_lock){
+            led_status = LED_ON;
+        }
+        set_big_LED_rgb(led_status,led_status,led_status);
     }
     return res;
 }
